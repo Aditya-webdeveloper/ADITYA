@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADITYA MATE</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"
+      integrity="sha512-EZI2cBcGPnmR89wTgVnN3602Yyi7muWo8y1B3a8WmIv1J9tYG+udH4LvmYjLiGp37yHB7FfaPBo8ly178m9g4Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css"
+    />
+    <link rel="shortcut icon" href="download (1).png" type="image/x-icon">
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    *::selection {
+      background-color: cyan;
+      color: black;
+    }
+    @font-face {
+      font-family: font-1;
+      src: url(handwriting-black-draft_DEMO.otf);
+    }
+    @font-face {
+      font-family: font-2;
+      src: url(abnes.otf);
+    }
+    @font-face {
+      font-family: font-3;
+      src: url(go3v2.ttf);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      overflow-x: hidden;
+      background-image: url(POSTER.png);
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      height: 10vh;
+      width: 100%;
+      position: fixed;
+      z-index: 99;
+      position: relative;
+    }
+    .logo {
+      color: white;
+      font-size: 15px;
+    }
+    .lists {
+      display: flex;
+    }
+    .lists h4 {
+      display: flex;
+      position: relative;
+      padding: 0 20px;
+      font-family: font-3;
+      font-weight: 100;
+      font-size: 20px;
+      color: white;
+      cursor: pointer;
+      transition: all ease 0.5s;
+    }
+    .lists h4:hover {
+      color: rgb(61, 61, 61);
+    }
+    .lists h4::after {
+      content: "";
+      position: absolute;
+      background-color: white;
+      height: 3px;
+      width: 0;
+      left: 0;
+      top: 100%;
+      transition: all ease 0.5s;
+    }
+    .lists h4:hover:after {
+      width: 100%;
+    }
+    span {
+      font-family: font-2;
+      color: cyan;
+      font-weight: 100;
+    }
+    .page-1 {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .left {
+      margin: 3rem;
+    }
+    .left h3 {
+      font-size: 40px;
+      color: white;
+    }
+    .left h1 {
+      font-size: 70px;
+    }
+    .btn {
+      margin: 2rem 0;
+    }
+    .btn button {
+      font-size: 20px;
+      width: 22vw;
+      text-align: center;
+      background: linear-gradient(
+        to left,
+        rgba(0, 255, 255, 0),
+        rgb(0, 255, 255),
+        rgba(255, 0, 0, 0)
+      );
+      padding: 10px 20px;
+      background-size: 200%;
+      border: none;
+      border-radius: 10px;
+      transition: all ease 0.5s;
+      font-family: font-3;
+      cursor: pointer;
+    }
+    .btn button:hover {
+      background-position: right;
+    }
+    .page-2 {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 8rem;
+      justify-content: space-around;
+    }
+    .right-section {
+      opacity: 0;
+      position: relative;
+      top: 50%;
+    }
+    .right-section img {
+      width: 65%;
+      border-radius: 20px;
+      filter: grayscale(0.5);
+      transition: all ease 0.5s;
+      object-fit: cover;
+    }
+    .right-section img:hover {
+      filter: grayscale(0);
+      border-radius: 0;
+    }
+    .left-section {
+      width: 65%;
+      margin: 3rem;
+      color: white;
+      opacity: 0;
+      position: relative;
+      left: -50%;
+    }
+    .left-section p {
+      font-size: 30px;
+      color: white;
+      margin: 2rem 3rem;
+      font-family: font-1;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+    .page-3 {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    .page-3 h1 {
+      font-size: 50px;
+      font-family: font-3;
+      color: white;
+      position: relative;
+      bottom: -8%;
+    }
+
+    .skills {
+      height: 90vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5rem;
+      opacity: 0;
+    }
+    .skills img {
+      position: relative;
+      width: 40%;
+      object-fit: cover;
+      text-align: center;
+      margin: 0 7rem;
+    }
+    .skills div p {
+      color: white;
+      font-size: 20px;
+      text-align: center;
+      width: 24vw;
+      margin: 2rem;
+    }
+    .skills div:nth-child(odd) {
+      position: relative;
+      top: 50%;
+    }
+    .skills div:nth-child(even) {
+      position: relative;
+      top: -50%;
+    }
+    .page-4 {
+      height: 110vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .page {
+      height: 80%;
+      width: 90%;
+      background-image: url(demon\ slayer.jpg);
+      background-size: cover;
+      border-radius: 10px;
+      position: relative;
+      left: -50%;
+      opacity: 0;
+    }
+    .contact {
+      height: 100%;
+      width: 40%;
+      border: 2px solid white;
+      background-color: rgba(255, 255, 255, 0.432);
+      backdrop-filter: blur(20px);
+      border-radius: 10px;
+      display: flex;
+      align-items: right;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      top: 50%;
+      opacity: 0;
+    }
+    .contact h1 {
+      text-align: center;
+      font-family: font-3;
+    }
+    .contact h2 {
+      font-family: font-1;
+      text-align: center;
+      margin: 0.5rem;
+    }
+    footer {
+      height: 10vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    footer h1 {
+      color: white;
+    }
+    .menu button {
+      border: 1px solid white;
+      border-radius: 20px;
+      font-size: 20px;
+      padding: 10px 35px;
+      font-family: font-3;
+      background: transparent;
+      color: white;
+      display: none;
+      position: fixed;
+    }
+    @media (max-width: 600px) {
+      body {
+        overflow-x: hidden;
+        background-image: url(POSTER.png);
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: right;
+      }
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 10vh;
+        width: 60%;
+        z-index: 99;
+      }
+      .logo {
+        color: white;
+        transition: all ease 0.5s;
+        font-size: 10px;
+      }
+      .menu button {
+        border: 1px solid white;
+        border-radius: 20px;
+        font-size: 20px;
+        padding: 10px 35px;
+        font-family: font-3;
+        background: transparent;
+        color: white;
+        display: block;
+      }
+      .lists {
+        display: none;
+        transition: all ease 0.5s;
+      }
+      .lists h4 {
+        position: relative;
+        top: -20%;
+        transform: translateY(240px);
+        text-align: right;
+        margin: 1rem;
+        font-size: 50px;
+      }
+      .left {
+        margin: 3rem;
+      }
+      .left h3 {
+        font-size: 40px;
+        color: white;
+      }
+      .left h1 {
+        font-size: 70px;
+      }
+      .btn {
+        margin: 2rem 0;
+      }
+      .btn button {
+        font-size: 20px;
+        width: 75vw;
+        text-align: center;
+        background: linear-gradient(
+          to left,
+          rgba(0, 255, 255, 0),
+          rgb(0, 255, 255),
+          rgba(255, 0, 0, 0)
+        );
+        padding: 10px 20px;
+        background-size: 200%;
+        border: none;
+        border-radius: 10px;
+        transition: all ease 0.5s;
+        font-family: font-3;
+        cursor: pointer;
+      }
+      .page-2 {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8rem;
+        justify-content: space-around;
+      }
+      .right-section {
+        opacity: 0;
+        position: relative;
+        top: 50%;
+      }
+      .right-section img {
+        width: 50vw;
+        border-radius: 20px;
+        filter: grayscale(0.5);
+        transition: all ease 0.5s;
+        object-fit: cover;
+      }
+      .right-section img:hover {
+        filter: grayscale(0);
+        border-radius: 0;
+      }
+      .left-section {
+        width: 1%;
+        margin: 3rem;
+        color: white;
+        opacity: 0;
+        position: relative;
+        left: -50%;
+      }
+      .left-section p {
+        font-size: 11px;
+        color: white;
+        margin: 2rem 3rem;
+        width: 27vw;
+        font-family: font-1;
+        position: relative;
+        left: 28%;
+      }
+      .page-3 {
+        height: 200vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .page-3 h1 {
+        font-size: 50px;
+        font-family: font-3;
+        color: white;
+        position: relative;
+        bottom: -8%;
+      }
+
+      .skills {
+        height: 200vh;
+        position: relative;
+        left: 19%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5rem;
+        overflow: hidden;
+        opacity: 0;
+      }
+      .skills img {
+        position: relative;
+        width: 20%;
+        object-fit: cover;
+        text-align: center;
+        margin: 0 7rem;
+      }
+      .skills div p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+        text-align: center;
+        width: 50vw;
+        margin: 2rem;
+      }
+      .skills div:nth-child(odd) {
+        position: relative;
+        top: 50%;
+      }
+      .skills div:nth-child(even) {
+        position: relative;
+        top: -50%;
+      }
+      .page-4 {
+        height: 110vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .page {
+        height: 60%;
+        width: 90%;
+        background-image: url(demon\ slayer.jpg);
+        background-size: cover;
+        border-radius: 10px;
+        position: relative;
+        left: -50%;
+        background-position: center;
+        opacity: 0;
+      }
+      .contact {
+        height: 100%;
+        width: 50%;
+        border: 2px solid white;
+        background-color: rgba(255, 255, 255, 0.432);
+        backdrop-filter: blur(20px);
+        border-radius: 10px;
+        display: flex;
+        align-items: right;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+        top: 50%;
+        opacity: 0;
+      }
+      .contact h1 {
+        text-align: center;
+        font-family: font-3;
+      }
+      .contact h2 {
+        font-family: font-1;
+        text-align: center;
+        margin: 0.5rem;
+        font-size: 15px;
+      }
+      footer {
+        height: 10vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      footer h1 {
+        color: white;
+      }
+      .menu-page {
+        height: 100vh;
+        width: 100%;
+        background-image: url(rengoku.png);
+        background-size: cover;
+        background-position: center;
+        transition: all ease 0.5s;
+        z-index: 99;
+        position: fixed;
+        top: -100%;
+        
+      }
+      .projects {
+      height: 50vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .projects h1{
+      font-size: 40px;
+      font-family: font-3;
+      color: white;
+      margin: 2rem;
+    }
+    .pro{
+      display: flex;
+      flex-direction: column;
+    }
+    .pro h3{
+      margin: 1rem;
+      display: block;
+      color: white;
+
+      font-family: sans-serif;
+    }
+    .pro h3:nth-child(odd){
+      position: relative;
+      opacity: 0;
+      left: 50%;
+      font-size: 20px;
+      text-align: right;
+      border-right: 2px solid white;
+    }
+    .pro h3:nth-child(even){
+      position: relative;
+      opacity: 0;
+      font-size: 20px;
+      text-align: left;
+      left: 0%;
+    }
+    }
+    .projects {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .projects h1{
+      font-size: 40px;
+      font-family: font-3;
+      color: white;
+      margin: 2rem;
+    }
+    .pro h3{
+      color: white;
+      font-size: 60px;
+      font-family: sans-serif;
+    }
+    .pro h3:nth-child(odd){
+      position: relative;
+      opacity: 0;
+      left: 100%;
+      border-right: 2px solid white;
+    }
+    .pro h3:nth-child(even){
+      position: relative;
+      opacity: 0;
+      left: -10%;
+    }
+  </style>
+  <body>
+    <div class="menu-page"></div>
+    <main class="main">
+      <div class="navbar">
+        <div class="logo">
+          <h1>ADITYA <span> PORTFOLIO</span></h1>
+        </div>
+        <div class="lists">
+          <h4><a href="#page-1">Home</a></h4>
+          <h4><a href="#page-2">About Me</a></h4>
+          <h4><a href="#page-3">Work</a></h4>
+          <h4><a href="#project">PROJECTS</a></h4>
+          <h4><a href="#page-4">Contact</a></h4>
+        </div>
+        <div class="menu">
+          <button>MENU</button>
+        </div>
+      </div>
+      <div class="page-1" id="page-1">
+        <div class="left">
+          <h3>Hey I am</h3>
+          <br />
+          <h1><span>ADITYA</span></h1>
+          <div class="btn">
+            <button>
+              <a href="#page-4" style="color: black">CONTACT ME</a>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="page-2" id="page-2">
+        <div class="left-section">
+          <h1><span>AbOUT ME</span></h1>
+          <p>
+            HEY I am Aditya,Are you finding someone to make your dynamic
+            website? I've done remote work for agencies, consulted for startups,
+            and collaborated with talented people to create digital products for
+            both business and consumer use. I'm quietly confident, naturally
+            curious, and perpetually working on improving my chops. lets shake
+            hand.
+          </p>
+        </div>
+        <div class="right-section">
+          <img
+            src="https://e1.pxfuel.com/desktop-wallpaper/538/504/desktop-wallpaper-demon-slayer-tanjiro-pfp-aesthetic.jpg"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="page-3" id="page-3">
+        <h1>MY SKILLS</h1>
+        <div class="skills">
+          <div class="html">
+            <img src="html.png" alt="" />
+            <p>
+              The role of HTML in web development is to provide the backbone and
+              structure of a web page. It defines the layout and organization of
+              content on a web page by using a ranked structure of elements.
+            </p>
+          </div>
+          <div class="css">
+            <img src="css.png" alt="" />
+            <p>
+              CSS is a design language that makes a website look more appealing
+              than just plain or uninspiring pieces of text. Whereas HTML
+              largely determines textual content, CSS determines visual
+              structure, layout, and aesthetics.
+            </p>
+          </div>
+          <div class="js">
+            <img src="js.png" alt="" />
+            <p>
+              JavaScript (JS) is a cross-platform, object-oriented programming
+              language used by developers to make web pages interactive. It
+              allows developers to create dynamically updating content, use
+              animations, pop-up menus, clickable buttons, control multimedia,
+              etc.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="projects" id="project">
+        <h1>My PROJECTS</h1>
+        <div class="pro">
+          <h3>E-commerce website</h3>
+          <h3>Company Work</h3>
+          <h3>Restuart website</h3>
+          <h3>Personal Portfolio</h3>
+          <h3>Business Website</h3>
+        </div>
+        <h1>MANY More</h1>
+      </div>
+      <div class="page-4" id="page-4">
+        <div class="page">
+          <div class="contact">
+            <h1>Hire Me</h1>
+            <h1>contact me</h1>
+            <h2>E-mail - khushimate@gmail.com</h2>
+            <h2>instragram - aditya_graphix_17</h2>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <footer>
+        <h1>ADITYA <span>PORTFOLIO</span></h1>
+      </footer>
+    </main>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"
+      integrity="sha512-OzC82YiH3UmMMs6Ydd9f2i7mS+UFL5f977iIoJ6oy07AJT+ePds9QOEtqXztSH29Nzua59fYS36knmMcv79GOg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+    <script src="port.js"></script>
+  </body>
+</html>
